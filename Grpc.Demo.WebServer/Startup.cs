@@ -9,6 +9,7 @@ namespace Grpc.Demo.WebServer
   {
     public void ConfigureServices(IServiceCollection services)
     {
+      services.AddGrpc();
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -19,6 +20,8 @@ namespace Grpc.Demo.WebServer
 
       app.UseEndpoints(endpoints =>
       {
+        endpoints.MapGrpcService<Services.GreeterService>();
+
         endpoints.MapGet("/", async context => await context.Response.WriteAsync("Hello gRPC server."));
       });
     }
