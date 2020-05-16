@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Google.Protobuf.WellKnownTypes;
 using GreeterService;
 using Grpc.Core;
@@ -19,14 +20,17 @@ namespace Grpc.Demo.WebServer.Services
     {
       _logger.LogInformation($"SayHello to {request.Name}.");
 
-      return Task.FromResult(new HelloReply { Message = $"Hello {request.Name}.", Status = ReplyStatusEnum.Success });
+      return Task.FromResult(createHelloReply($"Hello {request.Name}."));
     }
 
     public override Task<HelloReply> SayHelloToNobody(Empty request, ServerCallContext context)
     {
       _logger.LogInformation("SayHello to Nobody.");
 
-      return Task.FromResult(new HelloReply { Message = "Hello Nobody.", Status = ReplyStatusEnum.Success });
+      return Task.FromResult(createHelloReply("Hello Nobody."));
     }
+
+    private static HelloReply createHelloReply(string message)
+      => new HelloReply { Message = message, Status = ReplyStatusEnum.Success, Timestamp = Timestamp.FromDateTime(DateTime.UtcNow) };
   }
 }

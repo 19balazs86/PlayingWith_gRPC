@@ -17,7 +17,7 @@ namespace Grpc.Demo.ConsoleClient
       // Call: SayHello
       HelloReply reply = await client.SayHelloAsync(request);
 
-      Console.WriteLine(reply.Message);
+      Console.WriteLine($"{reply.Message} at {reply.Timestamp.ToDateTime().ToLocalTime()}");
 
       // Call: SayHelloToNobody
       reply = await client.SayHelloToNobodyAsync(new Empty());

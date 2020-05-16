@@ -2,6 +2,7 @@ syntax = "proto3";
 
 import "google/protobuf/empty.proto";
 import "ReplyStatusEnum.proto";
+import "google/protobuf/timestamp.proto";
 
 option csharp_namespace = "GreeterService";
 
@@ -21,4 +22,5 @@ message HelloRequest {
 message HelloReply {
   string message = 1;
   ReplyStatusEnum Status = 2;
+  google.protobuf.Timestamp Timestamp = 3;
 }
