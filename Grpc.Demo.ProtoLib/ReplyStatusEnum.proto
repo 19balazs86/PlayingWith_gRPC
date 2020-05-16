@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+option csharp_namespace = "GreeterService";
+
+package greet;
+
+enum ReplyStatusEnum {
+  Invalid = 0;
+  Success = 1;
+  Failure = 2;
+}

@@ -19,14 +19,14 @@ namespace Grpc.Demo.WebServer.Services
     {
       _logger.LogInformation($"SayHello to {request.Name}.");
 
-      return Task.FromResult(new HelloReply { Message = $"Hello {request.Name}." });
+      return Task.FromResult(new HelloReply { Message = $"Hello {request.Name}.", Status = ReplyStatusEnum.Success });
     }
 
     public override Task<HelloReply> SayHelloToNobody(Empty request, ServerCallContext context)
     {
       _logger.LogInformation("SayHello to Nobody.");
 
-      return Task.FromResult(new HelloReply { Message = "Hello Nobody." });
+      return Task.FromResult(new HelloReply { Message = "Hello Nobody.", Status = ReplyStatusEnum.Success });
     }
   }
 }

@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Protobuf Include="ReplyStatusEnum.proto" GrpcServices="None" />
     <Protobuf Include="GreeterService.proto" GrpcServices="Both" />
   </ItemGroup>
 
