@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.30104.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Grpc.Demo.ProtoLib", "Grpc.Demo.ProtoLib\Grpc.Demo.ProtoLib.csproj", "{792C2EA3-D954-4112-9BFA-129E6472E415}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grpc.Demo.WebServer", "Grpc.Demo.WebServer\Grpc.Demo.WebServer.csproj", "{CCA5185B-6769-466C-B5D6-1560E9A60189}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Grpc.Demo.WebServer", "Grpc.Demo.WebServer\Grpc.Demo.WebServer.csproj", "{CCA5185B-6769-466C-B5D6-1560E9A60189}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grpc.Demo.ConsoleClient", "Grpc.Demo.ConsoleClient\Grpc.Demo.ConsoleClient.csproj", "{5C72DA37-B83C-4ACD-9542-DD03BD9F6437}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{CCA5185B-6769-466C-B5D6-1560E9A60189}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CCA5185B-6769-466C-B5D6-1560E9A60189}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CCA5185B-6769-466C-B5D6-1560E9A60189}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C72DA37-B83C-4ACD-9542-DD03BD9F6437}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C72DA37-B83C-4ACD-9542-DD03BD9F6437}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C72DA37-B83C-4ACD-9542-DD03BD9F6437}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C72DA37-B83C-4ACD-9542-DD03BD9F6437}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
