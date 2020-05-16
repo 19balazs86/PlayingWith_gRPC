@@ -22,13 +22,18 @@ namespace Grpc.Demo.WebServer.Services
       _logger.LogInformation($"SayHello to {request.Name}.");
 
       return Task.FromResult(createHelloReply($"Hello {request.Name}."));
+
+      // return Task.FromResult((HelloReply)null);
+      // Client side: RpcException: 'Status(StatusCode=Cancelled, Detail="No message returned from method.")'
     }
 
-    public override Task<HelloReply> SayHelloToNobody(Empty request, ServerCallContext context)
+    public override Task<Empty> ThrowRpcException(Empty request, ServerCallContext context)
     {
-      _logger.LogInformation("SayHello to Nobody.");
+      var metadata = new Metadata { { "TestKey", "TestValue" } };
 
-      return Task.FromResult(createHelloReply("Hello Nobody."));
+      var status = new Status(StatusCode.Cancelled, "Fake error happened.");
+
+      throw new RpcException(status, metadata);
     }
 
     public override async Task SayHelloServerStreaming(HelloRequest request, IServerStreamWriter<HelloReply> responseStream, ServerCallContext context)

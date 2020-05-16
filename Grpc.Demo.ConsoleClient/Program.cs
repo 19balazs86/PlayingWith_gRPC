@@ -25,10 +25,15 @@ namespace Grpc.Demo.ConsoleClient
 
       reply.WriteToConsole();
 
-      // Call: SayHelloToNobody
-      reply = await client.SayHelloToNobodyAsync(new Empty());
-
-      reply.WriteToConsole();
+      // Call: ThrowRpcException
+      try
+      {
+        await client.ThrowRpcExceptionAsync(new Empty());
+      }
+      catch (RpcException ex)
+      {
+        Console.WriteLine(ex.Status);
+      }
 
       // Call: ServerStreaming
       await callServerStreaming(client, request);

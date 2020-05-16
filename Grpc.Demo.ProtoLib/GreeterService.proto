@@ -11,7 +11,7 @@ package greet;
 // The greeting service definition.
 service Greeter {
   rpc SayHello (HelloRequest) returns (HelloReply);
-  rpc SayHelloToNobody (google.protobuf.Empty) returns (HelloReply);
+  rpc ThrowRpcException (google.protobuf.Empty) returns (google.protobuf.Empty);
   rpc SayHelloServerStreaming (HelloRequest) returns (stream HelloReply);
 }
 
