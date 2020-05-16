@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Google.Protobuf.WellKnownTypes;
 using GreeterService;
@@ -28,6 +29,26 @@ namespace Grpc.Demo.WebServer.Services
       _logger.LogInformation("SayHello to Nobody.");
 
       return Task.FromResult(createHelloReply("Hello Nobody."));
+    }
+
+    public override async Task SayHelloServerStreaming(HelloRequest request, IServerStreamWriter<HelloReply> responseStream, ServerCallContext context)
+    {
+      int i = 0;
+
+      CancellationToken cancelToken = context.CancellationToken;
+
+      while (!cancelToken.IsCancellationRequested && i < 5)
+      {
+        string message = $"Hello {request.Name}? {++i}";
+
+        _logger.LogInformation($"Sending greeting '{message}'.");
+
+        await responseStream.WriteAsync(createHelloReply(message));
+
+        await Task.Delay(500);
+      }
+
+      _logger.LogInformation($"Request cancelled by the client ?= {cancelToken.IsCancellationRequested}.");
     }
 
     private static HelloReply createHelloReply(string message)
