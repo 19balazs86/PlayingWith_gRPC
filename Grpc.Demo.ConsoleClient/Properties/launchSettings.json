@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Run-gRPC-ConsoleClient": {
+      "commandName": "Project",
+      "commandLineArgs": ""
+    }
+  }
+}
