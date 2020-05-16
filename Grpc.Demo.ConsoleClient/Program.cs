@@ -5,13 +5,14 @@ using System.Threading.Tasks;
 using Google.Protobuf.WellKnownTypes;
 using GreeterService;
 using Grpc.Core;
+using Grpc.Demo.ProtoLib;
 using Grpc.Net.Client;
 
 namespace Grpc.Demo.ConsoleClient
 {
   public static class Program
   {
-    private static Random _random = new Random();
+    private static readonly Random _random = new Random();
 
     public static async Task Main(string[] args)
     {
@@ -22,13 +23,14 @@ namespace Grpc.Demo.ConsoleClient
       // Call: SayHello
       HelloReply reply = await client.SayHelloAsync(request);
 
-      Console.WriteLine($"{reply.Message} at {reply.Timestamp.ToDateTime().ToLocalTime()}");
+      reply.WriteToConsole();
 
       // Call: SayHelloToNobody
       reply = await client.SayHelloToNobodyAsync(new Empty());
 
-      Console.WriteLine(reply.Message);
+      reply.WriteToConsole();
 
+      // Call: ServerStreaming
       await callServerStreaming(client, request);
     }
 
@@ -42,7 +44,7 @@ namespace Grpc.Demo.ConsoleClient
       try
       {
         await foreach (HelloReply reply in serverStreamingCall.ResponseStream.ReadAllAsync())
-          Console.WriteLine($"{reply.Message} at {reply.Timestamp.ToDateTime().ToLocalTime()}");
+          reply.WriteToConsole();
       }
       catch (IOException ex)
       {
