@@ -1,3 +1,5 @@
+using System;
+using GreeterService;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -17,6 +19,8 @@ namespace Grpc.Demo.WorkerServiceClient
         .ConfigureServices((hostContext, services) =>
         {
           services.AddHostedService<Worker>();
+
+          services.AddGrpcClient<Greeter.GreeterClient>(options => options.Address = new Uri("https://localhost:5001"));
         });
     }
   }
