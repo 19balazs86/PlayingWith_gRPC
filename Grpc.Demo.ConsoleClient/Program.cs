@@ -1,10 +1,12 @@
 ﻿using System;
 using System.IO;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Google.Protobuf.WellKnownTypes;
 using GreeterService;
 using Grpc.Core;
+using Grpc.Demo.ProtoLib;
 using Grpc.Net.Client;
 
 namespace Grpc.Demo.ConsoleClient
@@ -39,6 +41,12 @@ namespace Grpc.Demo.ConsoleClient
 
       // Call: ClientStreaming
       await callClientStreaming(client);
+
+      // Call: SayHelloCertAuth
+      reply = await client.SayHelloCertAuthAsync(request);
+      // RpcException: Status(StatusCode=PermissionDenied, Detail="Bad gRPC response. HTTP status code: 403")
+
+      reply.WriteToConsole();
     }
 
     private static async Task callServerStreaming(Greeter.GreeterClient client, HelloRequest request)
@@ -92,9 +100,22 @@ namespace Grpc.Demo.ConsoleClient
 
     private static Greeter.GreeterClient createClient()
     {
-      GrpcChannel channel = GrpcChannel.ForAddress("https://localhost:5001");
+      var channelOptions = new GrpcChannelOptions { HttpClient = createHttpClient() };
+
+      GrpcChannel channel = GrpcChannel.ForAddress("https://localhost:5001", channelOptions);
 
       return new Greeter.GreeterClient(channel);
+    }
+
+    private static HttpClient createHttpClient()
+    {
+      // new X509Certificate2("<ClientCertPath.pfx>", "<Password>");
+
+      var handler = new HttpClientHandler();
+
+      handler.ClientCertificates.Add(CertificateStore.GetCertificate("f8ef375c3fbc3b2c7f237a6f6148a62a4ea6afd0"));
+
+      return new HttpClient(handler);
     }
   }
 }
