@@ -14,6 +14,7 @@ service Greeter {
   rpc ThrowRpcException (google.protobuf.Empty) returns (google.protobuf.Empty);
   rpc SayHelloServerStreaming (HelloRequest) returns (stream HelloReply);
   rpc SayHelloClientStreaming (stream HelloRequest) returns (HelloReply);
+  rpc SayHelloCertAuth (HelloRequest) returns (HelloReply);
 }
 
 // Messages
