@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Google.Protobuf.WellKnownTypes;
 using GreeterService;
 using Grpc.Core;
-using Grpc.Demo.ProtoLib;
 using Grpc.Net.Client;
 
 namespace Grpc.Demo.ConsoleClient

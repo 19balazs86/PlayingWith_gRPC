@@ -1,13 +1,15 @@
 ﻿using System;
-using GreeterService;
+using Google.Protobuf.WellKnownTypes;
 
-namespace Grpc.Demo.ProtoLib
+namespace GreeterService
 {
-  public static class Extensions
+  public sealed partial class HelloReply
   {
-    public static void WriteToConsole(this HelloReply reply)
-    {
-      Console.WriteLine($"{reply.Message} at {reply.Timestamp.ToDateTime().ToLocalTime()}");
-    }
+    public static HelloReply Create(string message, ReplyStatusEnum status = ReplyStatusEnum.Success)
+      => new HelloReply { Message = message, Status = status, Timestamp = Timestamp.FromDateTime(DateTime.UtcNow) };
+
+
+    public void WriteToConsole()
+      => Console.WriteLine($"{Message} at {Timestamp.ToDateTime().ToLocalTime()}");
   }
 }

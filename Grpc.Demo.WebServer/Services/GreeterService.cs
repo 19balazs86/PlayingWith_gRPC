@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
@@ -23,7 +22,7 @@ namespace Grpc.Demo.WebServer.Services
     {
       _logger.LogInformation($"SayHello to {request.Name}.");
 
-      return Task.FromResult(createHelloReply($"Hello {request.Name}."));
+      return Task.FromResult(HelloReply.Create($"Hello {request.Name}."));
 
       // return Task.FromResult((HelloReply)null);
       // Client side: RpcException: 'Status(StatusCode=Cancelled, Detail="No message returned from method.")'
@@ -50,7 +49,7 @@ namespace Grpc.Demo.WebServer.Services
 
         _logger.LogInformation($"Sending greeting '{message}'.");
 
-        await responseStream.WriteAsync(createHelloReply(message));
+        await responseStream.WriteAsync(HelloReply.Create(message));
 
         await Task.Delay(500);
       }
@@ -73,7 +72,7 @@ namespace Grpc.Demo.WebServer.Services
 
         _logger.LogInformation("End of client streaming.");
 
-        return createHelloReply($"Hi all: {string.Join(" and ", names)}.");
+        return HelloReply.Create($"Hi all: {string.Join(" and ", names)}.");
       }
       catch (IOException ex)
       {
@@ -82,8 +81,5 @@ namespace Grpc.Demo.WebServer.Services
         return new HelloReply();
       }
     }
-
-    private static HelloReply createHelloReply(string message)
-      => new HelloReply { Message = message, Status = ReplyStatusEnum.Success, Timestamp = Timestamp.FromDateTime(DateTime.UtcNow) };
   }
 }
