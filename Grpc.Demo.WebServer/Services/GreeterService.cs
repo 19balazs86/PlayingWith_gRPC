@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Google.Protobuf.WellKnownTypes;
 using GreeterService;
 using Grpc.Core;
+using Microsoft.AspNetCore.Authentication.Certificate;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Logging;
 
 namespace Grpc.Demo.WebServer.Services
@@ -80,6 +82,14 @@ namespace Grpc.Demo.WebServer.Services
 
         return new HelloReply();
       }
+    }
+
+    [Authorize(AuthenticationSchemes = CertificateAuthenticationDefaults.AuthenticationScheme)]
+    public override Task<HelloReply> SayHelloCertAuth(HelloRequest request, ServerCallContext context)
+    {
+      _logger.LogInformation($"{request.Name} is authenticated.");
+
+      return Task.FromResult(HelloReply.Create($"Hello authenticated {request.Name}."));
     }
   }
 }
