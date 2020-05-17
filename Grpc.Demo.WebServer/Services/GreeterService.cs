@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using Google.Protobuf.WellKnownTypes;
@@ -54,6 +56,31 @@ namespace Grpc.Demo.WebServer.Services
       }
 
       _logger.LogInformation($"Request cancelled by the client ?= {cancelToken.IsCancellationRequested}.");
+    }
+
+    public override async Task<HelloReply> SayHelloClientStreaming(IAsyncStreamReader<HelloRequest> requestStream, ServerCallContext context)
+    {
+      var names = new List<string>();
+
+      try
+      {
+        await foreach (HelloRequest request in requestStream.ReadAllAsync())
+        {
+          _logger.LogInformation($"Incoming name: {request.Name}");
+
+          names.Add(request.Name);
+        }
+
+        _logger.LogInformation("End of client streaming.");
+
+        return createHelloReply($"Hi all: {string.Join(" and ", names)}.");
+      }
+      catch (IOException ex)
+      {
+        _logger.LogError(ex.Message); // The request stream was aborted.
+
+        return new HelloReply();
+      }
     }
 
     private static HelloReply createHelloReply(string message)

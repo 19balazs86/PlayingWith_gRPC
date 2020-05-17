@@ -37,6 +37,9 @@ namespace Grpc.Demo.ConsoleClient
 
       // Call: ServerStreaming
       await callServerStreaming(client, request);
+
+      // Call: ClientStreaming
+      await callClientStreaming(client);
     }
 
     private static async Task callServerStreaming(Greeter.GreeterClient client, HelloRequest request)
@@ -55,6 +58,37 @@ namespace Grpc.Demo.ConsoleClient
       {
         Console.WriteLine($"IOException: {ex.Message}"); // The request was aborted
       }
+    }
+
+    private static async Task callClientStreaming(Greeter.GreeterClient client)
+    {
+      using var clientStreamingCall = client.SayHelloClientStreaming();
+
+      for (int i = 0; i < 5; i++)
+      {
+        string name = $"John #{i}";
+
+        Console.WriteLine($"Sending name: {name}");
+
+        try
+        {
+          await clientStreamingCall.RequestStream.WriteAsync(new HelloRequest { Name = name });
+        }
+        catch (InvalidOperationException ex)
+        {
+          Console.WriteLine($"InvalidOperationException: {ex.Message}");
+          // Can't write the message because the call is complete.
+          return;
+        }
+
+        await Task.Delay(500);
+      }
+
+      await clientStreamingCall.RequestStream.CompleteAsync();
+
+      HelloReply reply = await clientStreamingCall;
+
+      reply.WriteToConsole();
     }
 
     private static Greeter.GreeterClient createClient()
