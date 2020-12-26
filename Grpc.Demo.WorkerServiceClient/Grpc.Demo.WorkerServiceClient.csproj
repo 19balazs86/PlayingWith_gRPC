@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Worker">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <UserSecretsId>dotnet-Grpc.Demo.WorkerServiceClient-7F505BFE-6148-4B45-B4BF-95C2AC15EC76</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Grpc.Net.ClientFactory" Version="2.34.0" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.10" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>
