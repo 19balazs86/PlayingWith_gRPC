@@ -27,6 +27,7 @@ Try out the .NET Core client and server gRPC Remote Procedure Call (RPC) framewo
 - [gRPC for .NET Examples](https://github.com/grpc/grpc-dotnet/tree/master/examples#grpc-for-net-examples) *(GitHub)*
 - [.NET Core ❤ gRPC](https://grpc.io/blog/grpc-on-dotnetcore/) *(grpc.io)*
 - [Protobuf scalar data types](https://docs.microsoft.com/en-us/dotnet/architecture/grpc-for-wcf-developers/protobuf-data-types) *(Microsoft Docs)*
+- [Test gRPC services with Postman](https://learn.microsoft.com/en-us/aspnet/core/grpc/test-tools) - gRPC reflection *(Microsoft Docs)* | [gRPC reflection and JSON transcoding](https://youtu.be/et_2NBk4N4Y?t=448) *(YouTube - James Newton-King, 25m)*
 ---
 - [Using gRPC in ASP.NET Core](https://app.pluralsight.com/library/courses/aspnet-core-grpc/table-of-contents) *(Pluralsight - Shawn Wildermuth, 2h 32min)*
 - [Talking between services with gRPC](https://www.youtube.com/watch?v=W-bULzA0ki8) *(NET Core Summer Event - Marc Gravell, 50min)*

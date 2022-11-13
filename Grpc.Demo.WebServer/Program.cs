@@ -1,37 +1,35 @@
 using Grpc.Demo.ProtoLib;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Server.Kestrel.Https;
-using Microsoft.Extensions.Hosting;
 
 namespace Grpc.Demo.WebServer
 {
-  public static class Program
-  {
-    public static void Main(string[] args)
+    public static class Program
     {
-      CreateHostBuilder(args).Build().Run();
-    }
-
-    public static IHostBuilder CreateHostBuilder(string[] args)
-    {
-      return Host
-        .CreateDefaultBuilder(args)
-        .ConfigureWebHostDefaults(webBuilder =>
+        public static void Main(string[] args)
         {
-          webBuilder.UseStartup<Startup>();
+            CreateHostBuilder(args).Build().Run();
+        }
 
-          webBuilder.ConfigureKestrel(kestrelOptions =>
-          {
-            kestrelOptions.ConfigureHttpsDefaults(httpsOptions =>
-            {
-              // new X509Certificate2("<ServerCertPath.pfx>", "<Password>");
+        public static IHostBuilder CreateHostBuilder(string[] args)
+        {
+            return Host
+              .CreateDefaultBuilder(args)
+              .ConfigureWebHostDefaults(webBuilder =>
+              {
+                  webBuilder.UseStartup<Startup>();
 
-              httpsOptions.ClientCertificateMode      = ClientCertificateMode.AllowCertificate;
-              httpsOptions.ServerCertificate          = CertificateStore.GetCertificate("e57ee1fbef2cee2e87415104fdda177be3124de8");
-              httpsOptions.CheckCertificateRevocation = false;
-            });
-          });
-        });
+                  webBuilder.ConfigureKestrel(kestrelOptions =>
+                  {
+                      kestrelOptions.ConfigureHttpsDefaults(httpsOptions =>
+                      {
+                          // new X509Certificate2("<ServerCertPath.pfx>", "<Password>");
+
+                          httpsOptions.ClientCertificateMode      = ClientCertificateMode.AllowCertificate;
+                          httpsOptions.ServerCertificate          = CertificateStore.GetCertificate("2e2175c8ec45708d4c3ff37e815bf884c8f7c930");
+                          httpsOptions.CheckCertificateRevocation = false;
+                      });
+                  });
+              });
+        }
     }
-  }
 }
