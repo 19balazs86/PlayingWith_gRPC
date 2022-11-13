@@ -15,7 +15,7 @@ namespace Grpc.Demo.WebServer
 
             services.AddGrpc();
 
-            services.AddGrpcReflection(); // See: README.md
+            services.AddGrpcReflection(); // Enables it to test in Postman. See in README
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
