@@ -23,16 +23,19 @@ Try out the .NET Core client and server gRPC Remote Procedure Call (RPC) framewo
 
 #### Resources
 
-- [Introduction to gRPC on .NET Core](https://docs.microsoft.com/en-us/aspnet/core/grpc) *(Microsoft Docs)*
-- [gRPC for .NET Examples](https://github.com/grpc/grpc-dotnet/tree/master/examples#grpc-for-net-examples) *(GitHub)*
-- [.NET Core ❤ gRPC](https://grpc.io/blog/grpc-on-dotnetcore/) *(grpc.io)*
-- [Protobuf scalar data types](https://docs.microsoft.com/en-us/dotnet/architecture/grpc-for-wcf-developers/protobuf-data-types) *(Microsoft Docs)*
-- [Test gRPC services with Postman](https://learn.microsoft.com/en-us/aspnet/core/grpc/test-tools) - gRPC reflection *(Microsoft Docs)* | [gRPC reflection and JSON transcoding](https://youtu.be/et_2NBk4N4Y?t=448) *(YouTube - James Newton-King, 25m)*
+- [Overview for gRPC on .NET](https://docs.microsoft.com/en-us/aspnet/core/grpc) 📚
+- [gRPC for .NET Examples](https://github.com/grpc/grpc-dotnet/tree/master/examples#grpc-for-net-examples) 👤*grpc-dotnet*
+- [.NET Core ❤ gRPC](https://grpc.io/blog/grpc-on-dotnetcore/) 📓*grpc.io*
+- [Protobuf scalar data types](https://docs.microsoft.com/en-us/dotnet/architecture/grpc-for-wcf-developers/protobuf-data-types) 📚
+- Adding features: [GrpcReflection testing services with Postman](https://learn.microsoft.com/en-us/aspnet/core/grpc/test-tools) 📚 and [JSON transcoding](https://learn.microsoft.com/en-us/aspnet/core/grpc/json-transcoding) 📚
+  - [gRPC Reflection and JSON transcoding](https://youtu.be/et_2NBk4N4Y?t=448) 📽️*25min, James Newton-King*
+  - [Enabling gRPC server reflection](https://irina.codes/enabling-grpc-server-reflection/) 📓*IrinaScurtu*
 ---
-- [Using gRPC in ASP.NET Core](https://app.pluralsight.com/library/courses/aspnet-core-grpc/table-of-contents) *(Pluralsight - Shawn Wildermuth, 2h 32min)*
-- [Talking between services with gRPC](https://www.youtube.com/watch?v=W-bULzA0ki8) *(NET Core Summer Event - Marc Gravell, 50min)*
-- [gRPC for ASP.NET Core](https://www.youtube.com/watch?v=JpM95-Wplzo) *(NDC Conferences - James Newton-King, 1h)*
+- [Using gRPC in ASP.NET Core](https://app.pluralsight.com/library/courses/aspnet-core-grpc/table-of-contents) 📽️*Pluralsight - Shawn Wildermuth, 2h 32min*
+- [Talking between services with gRPC](https://www.youtube.com/watch?v=W-bULzA0ki8) 📽️*NET Core Summer Event - Marc Gravell, 50min*
+- [gRPC for ASP.NET Core](https://www.youtube.com/watch?v=JpM95-Wplzo) 📽️*NDC Conferences - James Newton-King, 1h*
 
 ---
 
-- [Message validation with FluentValidation](https://anthonygiretti.com/2020/05/18/grpc-asp-net-core-3-1-model-validation) *(Anthony Giretti)*
+- [Message validation with FluentValidation](https://anthonygiretti.com/2020/05/18/grpc-asp-net-core-3-1-model-validation) 📓*Anthony Giretti*
+
