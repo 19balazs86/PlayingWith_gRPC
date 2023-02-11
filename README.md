@@ -26,8 +26,9 @@ Try out the .NET Core client and server gRPC Remote Procedure Call (RPC) framewo
 - [Overview for gRPC on .NET](https://docs.microsoft.com/en-us/aspnet/core/grpc) 📚
 - [gRPC for .NET Examples](https://github.com/grpc/grpc-dotnet/tree/master/examples#grpc-for-net-examples) 👤*grpc-dotnet*
 - [.NET Core ❤ gRPC](https://grpc.io/blog/grpc-on-dotnetcore/) 📓*grpc.io*
-- [Protobuf scalar data types](https://docs.microsoft.com/en-us/dotnet/architecture/grpc-for-wcf-developers/protobuf-data-types) 📚
-- Adding features: [GrpcReflection testing services with Postman](https://learn.microsoft.com/en-us/aspnet/core/grpc/test-tools) 📚 and [JSON transcoding](https://learn.microsoft.com/en-us/aspnet/core/grpc/json-transcoding) 📚
+- [Protocol Buffers Documentation](https://protobuf.dev) 📓*protobuf.dev*
+- [Protobuf scalar data types](https://docs.microsoft.com/en-us/dotnet/architecture/grpc-for-wcf-developers/protobuf-data-types) 📚| [Any and OneOf fields](https://learn.microsoft.com/en-us/dotnet/architecture/grpc-for-wcf-developers/protobuf-any-oneof) 📚
+- Adding features: [GrpcReflection testing services with Postman](https://learn.microsoft.com/en-us/aspnet/core/grpc/test-tools) 📚 *(see below)* and [JSON transcoding](https://learn.microsoft.com/en-us/aspnet/core/grpc/json-transcoding) 📚
   - [gRPC Reflection and JSON transcoding](https://youtu.be/et_2NBk4N4Y?t=448) 📽️*25min, James Newton-King*
   - [Enabling gRPC server reflection](https://irina.codes/enabling-grpc-server-reflection/) 📓*IrinaScurtu*
 ---
@@ -39,3 +40,6 @@ Try out the .NET Core client and server gRPC Remote Procedure Call (RPC) framewo
 
 - [Message validation with FluentValidation](https://anthonygiretti.com/2020/05/18/grpc-asp-net-core-3-1-model-validation) 📓*Anthony Giretti*
 
+---
+
+![Postman-gRPC-Endpoints](Postman-gRPC-Endpoints.jpg)

@@ -15,6 +15,7 @@ service Greeter {
   rpc SayHelloServerStreaming (HelloRequest) returns (stream HelloReply);
   rpc SayHelloClientStreaming (stream HelloRequest) returns (HelloReply);
   rpc SayHelloCertAuth (HelloRequest) returns (HelloReply);
+  rpc ReceiveNotification (ChangeNotification) returns (google.protobuf.Empty);
 }
 
 // Messages
@@ -26,4 +27,21 @@ message HelloReply {
   string message = 1;
   ReplyStatusEnum Status = 2;
   google.protobuf.Timestamp Timestamp = 3;
+}
+
+// Notification messages
+message ChangeNotification {
+  int32 id = 1;
+  oneof instrument {
+    Stock stock = 2;
+    Currency currency = 3;
+  }
+}
+
+message Stock {
+  string Symbol = 1;
+}
+
+message Currency {
+  string CurrencyCode = 1;
 }
