@@ -1,12 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Worker">
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <Nullable>disable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <UserSecretsId>dotnet-Grpc.Demo.WorkerServiceClient-7F505BFE-6148-4B45-B4BF-95C2AC15EC76</UserSecretsId>
-  </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="Grpc.Net.ClientFactory" Version="2.63.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
@@ -15,4 +8,5 @@
   <ItemGroup>
     <ProjectReference Include="..\Grpc.Demo.ProtoLib\Grpc.Demo.ProtoLib.csproj" />
   </ItemGroup>
+
 </Project>
