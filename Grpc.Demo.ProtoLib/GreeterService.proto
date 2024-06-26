@@ -1,8 +1,10 @@
 syntax = "proto3";
 
 import "google/protobuf/empty.proto";
-import "ReplyStatusEnum.proto";
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/any.proto";
+
+import "ReplyStatusEnum.proto";
 
 option csharp_namespace = "GreeterService";
 
@@ -15,33 +17,34 @@ service Greeter {
   rpc SayHelloServerStreaming (HelloRequest) returns (stream HelloReply);
   rpc SayHelloClientStreaming (stream HelloRequest) returns (HelloReply);
   rpc SayHelloCertAuth (HelloRequest) returns (HelloReply);
-  rpc ReceiveNotification (ChangeNotification) returns (google.protobuf.Empty);
+  rpc SayHelloAnimal (HelloAnimalRequest) returns (google.protobuf.Empty);
 }
 
 // Messages
 message HelloRequest {
-  string name = 1;
+  string Name = 1;
 }
 
 message HelloReply {
-  string message = 1;
+  string Message = 1;
   ReplyStatusEnum Status = 2;
   google.protobuf.Timestamp Timestamp = 3;
 }
 
-// Notification messages
-message ChangeNotification {
-  int32 id = 1;
-  oneof instrument {
-    Stock stock = 2;
-    Currency currency = 3;
-  }
+// HelloAnimalRequest messages
+message HelloAnimalRequest {
+  int32 Id = 1;
+  oneof CatOrDog {
+    CatAnimal Cat = 2;
+    DogAnimal Dog = 3;
+  };
+  google.protobuf.Any MyAnyObject = 4;
 }
 
-message Stock {
-  string Symbol = 1;
+message CatAnimal {
+  string CatName = 1;
 }
 
-message Currency {
-  string CurrencyCode = 1;
+message DogAnimal {
+  string Dogname = 1;
 }

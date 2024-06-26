@@ -21,11 +21,14 @@ public static class Program
 
         reply.WriteToConsole();
 
-        // Call: ReceiveNotification
-        var changeNotification = new ChangeNotification { Id = 1, Stock = new Stock { Symbol = "StockSymbol" } };
+        // Call: SayHelloAnimal
+        var cat = new CatAnimal { CatName = "MyCat Name" };
+
+        var helloAnimalRequest = new HelloAnimalRequest { Id = 1, Cat = cat, MyAnyObject = Any.Pack(cat) };
+        // You can Pack any IMessage object: Any.Pack(new StringValue { Value = "MyStringValue" })
 
         Console.WriteLine("--> Call: ReceiveNotification");
-        await client.ReceiveNotificationAsync(changeNotification);
+        await client.SayHelloAnimalAsync(helloAnimalRequest);
 
         // Call: ThrowRpcException
         Console.WriteLine("--> Call: ThrowRpcException");
@@ -79,7 +82,7 @@ public static class Program
 
     private static async Task callClientStreaming(Greeter.GreeterClient client)
     {
-        using var clientStreamingCall = client.SayHelloClientStreaming();
+        using AsyncClientStreamingCall<HelloRequest, HelloReply> clientStreamingCall = client.SayHelloClientStreaming();
 
         for (int i = 0; i < 5; i++)
         {

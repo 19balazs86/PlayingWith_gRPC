@@ -74,7 +74,9 @@ public class GreeterService : Greeter.GreeterBase
         }
         catch (IOException ex)
         {
-            _logger.LogError(ex.Message); // The request stream was aborted.
+            // I happens when the client dispose the object: AsyncClientStreamingCall
+            // Message: "The client reset the request stream"
+            _logger.LogError(ex.Message);
 
             return new HelloReply();
         }
@@ -88,16 +90,37 @@ public class GreeterService : Greeter.GreeterBase
         return Task.FromResult(HelloReply.Create($"Hello authenticated {request.Name}."));
     }
 
-    public override Task<Empty> ReceiveNotification(ChangeNotification request, ServerCallContext context)
+    public override Task<Empty> SayHelloAnimal(HelloAnimalRequest request, ServerCallContext context)
     {
-        string oneOfText = request.InstrumentCase switch
+        // --> Check: OneOf
+        string oneOfText = request.CatOrDogCase switch
         {
-            ChangeNotification.InstrumentOneofCase.Stock    => $"OneOf: {request.Stock}",
-            ChangeNotification.InstrumentOneofCase.Currency => $"OneOf: {request.Currency}",
-            _                                               => "OneOf: None"
+            HelloAnimalRequest.CatOrDogOneofCase.Cat => $"OneOf: {request.Cat}",
+            HelloAnimalRequest.CatOrDogOneofCase.Dog => $"OneOf: {request.Dog}",
+            _                                        => "OneOf: None"
         };
 
-        _logger.LogInformation("{OneOfText}", oneOfText);
+        // --> Check: Any
+        string anyText = "MyAnyObject was null";
+
+        if (request.MyAnyObject is not null)
+        {
+            // MyAnyObject can be anything. You can use StringValue.Descriptor, BoolValue.Descriptor...
+            if (request.MyAnyObject.Is(CatAnimal.Descriptor))
+            {
+                anyText = request.MyAnyObject.Unpack<CatAnimal>().ToString();
+            }
+            else if (request.MyAnyObject.Is(DogAnimal.Descriptor))
+            {
+                anyText = request.MyAnyObject.Unpack<DogAnimal>().ToString();
+            }
+            else
+            {
+                anyText = request.MyAnyObject.TypeUrl;
+            }
+        }
+
+        _logger.LogInformation("OneOf: '{OneOfText}' | AnyObject: {AnyText}", oneOfText, anyText);
 
         return Task.FromResult(new Empty());
     }
