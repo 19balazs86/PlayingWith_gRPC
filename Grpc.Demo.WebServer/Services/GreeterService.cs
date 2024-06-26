@@ -17,7 +17,7 @@ public class GreeterService : Greeter.GreeterBase
 
     public override Task<HelloReply> SayHello(HelloRequest request, ServerCallContext context)
     {
-        _logger.LogInformation($"SayHello to {request.Name}.");
+        _logger.LogInformation("SayHello to '{Name}'.", request.Name);
 
         return Task.FromResult(HelloReply.Create($"Hello {request.Name}."));
 
@@ -29,7 +29,7 @@ public class GreeterService : Greeter.GreeterBase
     {
         var metadata = new Metadata { { "TestKey", "TestValue" } };
 
-        var status = new Status(StatusCode.Cancelled, "Fake error happened.");
+        var status = new Status(StatusCode.Internal, "Fake error happened.");
 
         throw new RpcException(status, metadata);
     }
@@ -42,16 +42,17 @@ public class GreeterService : Greeter.GreeterBase
 
         while (!cancelToken.IsCancellationRequested && i < 5)
         {
-            string message = $"Hello {request.Name}? {++i}";
+            string message = $"Hello {request.Name} #{++i}";
 
-            _logger.LogInformation($"Sending greeting '{message}'.");
+            _logger.LogInformation("Sending greeting '{Message}'.", message);
 
             await responseStream.WriteAsync(HelloReply.Create(message));
+            // await responseStream.WriteAllAsync([HelloReply.Create(message)]); // You can send a list of messages
 
             await Task.Delay(500);
         }
 
-        _logger.LogInformation($"Request cancelled by the client ?= {cancelToken.IsCancellationRequested}.");
+        _logger.LogInformation("Request cancelled by the client ?= {YesOrNo}.", cancelToken.IsCancellationRequested);
     }
 
     public override async Task<HelloReply> SayHelloClientStreaming(IAsyncStreamReader<HelloRequest> requestStream, ServerCallContext context)
@@ -62,7 +63,7 @@ public class GreeterService : Greeter.GreeterBase
         {
             await foreach (HelloRequest request in requestStream.ReadAllAsync())
             {
-                _logger.LogInformation($"Incoming name: {request.Name}");
+                _logger.LogInformation("Incoming name: '{Name}'", request.Name);
 
                 names.Add(request.Name);
             }
@@ -82,7 +83,7 @@ public class GreeterService : Greeter.GreeterBase
     [Authorize(AuthenticationSchemes = CertificateAuthenticationDefaults.AuthenticationScheme)]
     public override Task<HelloReply> SayHelloCertAuth(HelloRequest request, ServerCallContext context)
     {
-        _logger.LogInformation($"{request.Name} is authenticated.");
+        _logger.LogInformation("{Name} is authenticated.", request.Name);
 
         return Task.FromResult(HelloReply.Create($"Hello authenticated {request.Name}."));
     }

@@ -71,9 +71,9 @@ public static class Program
                 reply.WriteToConsole();
             }
         }
-        catch (IOException ex)
+        catch (RpcException ex)
         {
-            Console.WriteLine($"IOException: {ex.Message}"); // The request was aborted
+            Console.WriteLine("I expected an RpcException. Status: '{0}'", ex.Status); // The request was aborted
         }
     }
 

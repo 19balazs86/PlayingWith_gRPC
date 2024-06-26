@@ -1,34 +1,31 @@
-using System.Threading;
-using System.Threading.Tasks;
 using GreeterService;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
-namespace Grpc.Demo.WorkerServiceClient
+namespace Grpc.Demo.WorkerServiceClient;
+
+public class Worker : BackgroundService
 {
-  public class Worker : BackgroundService
-  {
     private readonly ILogger<Worker> _logger;
-    private readonly Greeter.GreeterClient _greeterClient;
 
-    private static readonly HelloRequest _request = new HelloRequest { Name = "Worker Service" };
+    private readonly Greeter.GreeterClient _greeterClient;
 
     public Worker(ILogger<Worker> logger, Greeter.GreeterClient greeterClient)
     {
-      _logger        = logger;
-      _greeterClient = greeterClient;
+        _logger = logger;
+
+        _greeterClient = greeterClient;
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-      while (!stoppingToken.IsCancellationRequested)
-      {
-        HelloReply reply = await _greeterClient.SayHelloAsync(_request);
+        var request = new HelloRequest { Name = "Worker Service" };
 
-        _logger.LogInformation(reply.ToString());
+        while (!stoppingToken.IsCancellationRequested)
+        {
+            HelloReply reply = await _greeterClient.SayHelloAsync(request);
 
-        await Task.Delay(1000, stoppingToken);
-      }
+            _logger.LogInformation(reply.ToString());
+
+            await Task.Delay(1000, stoppingToken);
+        }
     }
-  }
 }

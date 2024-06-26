@@ -1,27 +1,22 @@
-using System;
 using GreeterService;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 
-namespace Grpc.Demo.WorkerServiceClient
+namespace Grpc.Demo.WorkerServiceClient;
+
+public static class Program
 {
-  public static class Program
-  {
     public static void Main(string[] args)
     {
-      CreateHostBuilder(args).Build().Run();
-    }
+        HostApplicationBuilder builder = Host.CreateApplicationBuilder(args);
 
-    public static IHostBuilder CreateHostBuilder(string[] args)
-    {
-      return Host
-        .CreateDefaultBuilder(args)
-        .ConfigureServices((hostContext, services) =>
+        var services = builder.Services;
+
+        // Add services to the container
         {
-          services.AddHostedService<Worker>();
+            services.AddHostedService<Worker>();
 
-          services.AddGrpcClient<Greeter.GreeterClient>(options => options.Address = new Uri("https://localhost:5001"));
-        });
+            services.AddGrpcClient<Greeter.GreeterClient>(options => options.Address = new Uri("https://localhost:5001"));
+        }
+
+        builder.Build().Run();
     }
-  }
 }
