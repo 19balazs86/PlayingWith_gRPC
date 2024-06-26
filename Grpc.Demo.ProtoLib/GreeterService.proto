@@ -32,6 +32,7 @@ message HelloReply {
 }
 
 // HelloAnimalRequest messages
+// The OneOf type can be good for either the desired object or an error object
 message HelloAnimalRequest {
   int32 Id = 1;
   oneof CatOrDog {
