@@ -1,12 +1,12 @@
 # Playing with .NET Core gRPC
-Try out the .NET Core client and server gRPC Remote Procedure Call (RPC) framework. This can be a good fit for high-performance or streaming communication between microservices.
+Explore the fundamentals and features of the gRPC Remote Procedure Call (RPC) framework in .NET. It is a good fit for high-performance or streaming communication between microservices.
 
-#### In this example
+#### Projects in the solution
 
 `Grpc.Demo.ProtoLib`
 
 - Contains the proto file in a common library for the client and server projects
-- CertificateStore.cs: It is used to read the certificate from the Current User Store
+- CertificateHelper.cs: It is used to read the certificate from the Current User Store
 
 `Grpc.Demo.WebServer`
 
@@ -27,7 +27,8 @@ Try out the .NET Core client and server gRPC Remote Procedure Call (RPC) framewo
 - [gRPC for .NET Examples](https://github.com/grpc/grpc-dotnet/tree/master/examples#grpc-for-net-examples) 👤*grpc-dotnet*
 - [.NET Core ❤ gRPC](https://grpc.io/blog/grpc-on-dotnetcore/) 📓*grpc.io*
 - [Protocol Buffers Documentation](https://protobuf.dev) 📓*protobuf.dev*
-- [Protobuf scalar data types](https://docs.microsoft.com/en-us/dotnet/architecture/grpc-for-wcf-developers/protobuf-data-types) 📚| [Any and OneOf fields](https://learn.microsoft.com/en-us/dotnet/architecture/grpc-for-wcf-developers/protobuf-any-oneof) 📚
+- [Ebook - gRPC for WCF developers](https://github.com/dotnet-architecture/eBooks/blob/1ed30275281b9060964fcb2a4c363fe7797fe3f3/current/grpc-for-wcf-developers/gRPC-for-WCF-Developers.pdf) 👤*.NET Architecture*
+- [Protobuf data types](https://learn.microsoft.com/en-us/aspnet/core/grpc/protobuf) 📚*MS-Learn*
 - Adding features: [GrpcReflection testing services with Postman](https://learn.microsoft.com/en-us/aspnet/core/grpc/test-tools) 📚 *(see below)* and [JSON transcoding](https://learn.microsoft.com/en-us/aspnet/core/grpc/json-transcoding) 📚
   - [gRPC Reflection and JSON transcoding](https://youtu.be/et_2NBk4N4Y?t=448) 📽️*25min, James Newton-King*
   - [Enabling gRPC server reflection](https://irina.codes/enabling-grpc-server-reflection/) 📓*IrinaScurtu*

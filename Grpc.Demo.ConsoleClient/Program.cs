@@ -8,15 +8,15 @@ namespace Grpc.Demo.ConsoleClient;
 
 public static class Program
 {
-    private static readonly Random _random = new Random();
-
     public static async Task Main(string[] args)
     {
         var client = createClient();
 
-        HelloRequest request = new HelloRequest { Name = "John Doe" };
+        var request = new HelloRequest { Name = "John Doe" };
 
         // Call: SayHello
+        Console.WriteLine("--> Call: SayHello");
+
         HelloReply reply = await client.SayHelloAsync(request);
 
         reply.WriteToConsole();
@@ -24,25 +24,34 @@ public static class Program
         // Call: ReceiveNotification
         var changeNotification = new ChangeNotification { Id = 1, Stock = new Stock { Symbol = "StockSymbol" } };
 
+        Console.WriteLine("--> Call: ReceiveNotification");
         await client.ReceiveNotificationAsync(changeNotification);
 
         // Call: ThrowRpcException
+        Console.WriteLine("--> Call: ThrowRpcException");
+
         try
         {
             await client.ThrowRpcExceptionAsync(new Empty());
         }
         catch (RpcException ex)
         {
-            Console.WriteLine(ex.Status);
+            Console.WriteLine("I expected an RpcException. Status: '{0}'", ex.Status);
         }
 
         // Call: ServerStreaming
+        Console.WriteLine("--> Call: ServerStreaming");
+
         await callServerStreaming(client, request);
 
         // Call: ClientStreaming
+        Console.WriteLine("--> Call: ClientStreaming");
+
         await callClientStreaming(client);
 
         // Call: SayHelloCertAuth
+        Console.WriteLine("--> Call: SayHelloCertAuth");
+
         reply = await client.SayHelloCertAuthAsync(request);
         // RpcException: Status(StatusCode=PermissionDenied, Detail="Bad gRPC response. HTTP status code: 403")
 
@@ -51,15 +60,16 @@ public static class Program
 
     private static async Task callServerStreaming(Greeter.GreeterClient client, HelloRequest request)
     {
-        var cts = new CancellationTokenSource();
-        cts.CancelAfter(TimeSpan.FromMilliseconds(_random.Next(2000, 3000)));
+        using var cts = new CancellationTokenSource(TimeSpan.FromMilliseconds(Random.Shared.Next(2_000, 4_000)));
 
         using var serverStreamingCall = client.SayHelloServerStreaming(request, cancellationToken: cts.Token);
 
         try
         {
             await foreach (HelloReply reply in serverStreamingCall.ResponseStream.ReadAllAsync())
+            {
                 reply.WriteToConsole();
+            }
         }
         catch (IOException ex)
         {
@@ -95,6 +105,8 @@ public static class Program
 
         HelloReply reply = await clientStreamingCall;
 
+        Console.Write("ClientStreaming response: ");
+
         reply.WriteToConsole();
     }
 
@@ -113,7 +125,7 @@ public static class Program
 
         var handler = new HttpClientHandler();
 
-        handler.ClientCertificates.Add(CertificateStore.GetCertificate("da6ed664e5920ab2192a1993a04bf0d7a5d8f6e9"));
+        handler.ClientCertificates.Add(CertificateHelper.GetCertificate("da6ed664e5920ab2192a1993a04bf0d7a5d8f6e9"));
 
         return new HttpClient(handler);
     }

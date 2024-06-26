@@ -25,7 +25,7 @@ public static class Program
                       // new X509Certificate2("<ServerCertPath.pfx>", "<Password>");
 
                       httpsOptions.ClientCertificateMode      = ClientCertificateMode.AllowCertificate;
-                      httpsOptions.ServerCertificate          = CertificateStore.GetCertificate("0df08ea616f04c3f8eac4f95a69725e0c1d3d4bf");
+                      httpsOptions.ServerCertificate          = CertificateHelper.GetCertificate("0df08ea616f04c3f8eac4f95a69725e0c1d3d4bf");
                       httpsOptions.CheckCertificateRevocation = false;
                   });
               });
