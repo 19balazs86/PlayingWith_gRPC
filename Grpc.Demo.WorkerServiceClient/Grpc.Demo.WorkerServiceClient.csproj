@@ -2,7 +2,7 @@
 
   <ItemGroup>
     <PackageReference Include="Grpc.Net.ClientFactory" Version="2.66.0" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.1" />
   </ItemGroup>
 
   <ItemGroup>
